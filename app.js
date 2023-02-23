@@ -16,6 +16,7 @@ let winPointOption = document.querySelector('#winPointOption')
 btnDisabled()
 
 winPointOption.addEventListener('change', function () {
+	resetButton.removeAttribute('disabled')
 	winPoint = this.value
 	isGameOver = false
 	resetScore()
@@ -67,6 +68,7 @@ function resetScore() {
 }
 
 resetButton.addEventListener('click', function () {
+	resetButton.setAttribute('disabled', true)
 	isGameOver = true
 	resetScore()
 	btnDisabled()
