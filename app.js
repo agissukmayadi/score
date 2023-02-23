@@ -1,64 +1,75 @@
-const p1Button = document.querySelector('#p1-button');
-const p2Button = document.querySelector('#p2-button');
-const resetButton = document.querySelector('#reset');
-const playTo = document.querySelector('#playto');
+let p1Display = document.querySelector('#p1Display')
+let p2Display = document.querySelector('#p2Display')
 
-const p1Display = document.querySelector('#p1-display');
-const p2Display = document.querySelector('#p2-display');
+let p1Button = document.querySelector('#p1Button')
+let p2Button = document.querySelector('#p2Button')
 
-let p1Score = 0;
-let p2Score = 0;
-let winningScore = 0;
-let isGameOver = false;
+let resetButton = document.querySelector('#resetButton')
 
-function disableButton() {
-	if (winningScore == 0) {
-		p1Button.setAttribute('disabled', '');
-		p2Button.setAttribute('disabled', '');
-	} else {
-		p1Button.removeAttribute('disabled');
-		p2Button.removeAttribute('disabled');
-	}
+let p1Score = 0
+let p2Score = 0
+
+let isGameOver = true
+let winPoint
+
+let winPointOption = document.querySelector('#winPointOption')
+btnDisabled()
+
+winPointOption.addEventListener('change', function () {
+	winPoint = this.value
+	isGameOver = false
+	resetScore()
+	btnEnabled()
+})
+
+function btnDisabled() {
+	p1Button.setAttribute('disabled', true)
+	p2Button.setAttribute('disabled', true)
 }
 
-function reset() {
-	isGameOver = false;
-	p1Score = 0;
-	p2Score = 0;
-	p1Display.textContent = 0;
-	p2Display.textContent = 0;
-	p1Display.classList.remove('text-success');
-	p2Display.classList.remove('text-success');
+function btnEnabled() {
+	p1Button.removeAttribute('disabled')
+	p2Button.removeAttribute('disabled')
 }
+
 
 p1Button.addEventListener('click', function () {
-	if (!isGameOver) {
-		p1Score += 1;
-		if (p1Score === winningScore) {
-			isGameOver = true;
-			p1Display.classList.add('text-success');
+	if (isGameOver === false) {
+		p1Score += 1
+		if (p1Score == winPoint) {
+			isGameOver = true
+			p1Display.classList.add('text-success')
+			btnDisabled()
 		}
-		p1Display.textContent = p1Score;
 	}
-});
+	p1Display.innerText = p1Score
+})
 
 p2Button.addEventListener('click', function () {
-	if (!isGameOver) {
-		p2Score += 1;
-		if (p2Score === winningScore) {
-			isGameOver = true;
-			p2Display.classList.add('text-success');
+	if (isGameOver === false) {
+		p2Score += 1
+		if (p2Score == winPoint) {
+			isGameOver = true
+			p2Display.classList.add('text-success')
+			btnDisabled()
 		}
-		p2Display.textContent = p2Score;
 	}
-});
+	p2Display.innerText = p2Score
+})
 
-resetButton.addEventListener('click', reset);
+function resetScore() {
+	p1Display.classList.remove('text-success')
+	p2Display.classList.remove('text-success')
+	p1Score = 0
+	p2Score = 0
+	p1Display.innerText = p1Score
+	p2Display.innerText = p2Score
+}
 
-playTo.addEventListener('change', function () {
-	winningScore = parseInt(this.value);
-	disableButton();
-	reset();
-});
-
-disableButton();
+resetButton.addEventListener('click', function () {
+	isGameOver = true
+	resetScore()
+	btnDisabled()
+	winPointOption[0].removeAttribute('selected')
+	winPointOption[0].setAttribute('selected', true)
+})

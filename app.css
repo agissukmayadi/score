@@ -15,7 +15,7 @@ h2 {
 }
 
 .points p {
-	font-family: 'Orbitron', sans-serif;
+	font-family: "Orbitron", sans-serif;
 	font-weight: 400;
 	font-size: 80px;
 	background: #000;
@@ -37,7 +37,7 @@ h2 {
 	border-color: #f94f6d;
 }
 
-.btn-check:focus + .btn-primary,
+.btn-check:focus+.btn-primary,
 .btn-primary:focus {
 	color: #fff;
 	background-color: #f94f6d;
