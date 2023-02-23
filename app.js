@@ -11,6 +11,7 @@ let p2Score = 0
 
 let isGameOver = true
 let winPoint
+let winner
 
 let winPointOption = document.querySelector('#winPointOption')
 btnDisabled()
@@ -33,6 +34,11 @@ function btnEnabled() {
 	p2Button.removeAttribute('disabled')
 }
 
+let displayWinner = document.querySelector('#displayWinner')
+
+function setWinner(winner) {
+	displayWinner.innerText = `${winner} WIN`
+}
 
 p1Button.addEventListener('click', function () {
 	if (isGameOver === false) {
@@ -41,6 +47,8 @@ p1Button.addEventListener('click', function () {
 			isGameOver = true
 			p1Display.classList.add('text-success')
 			btnDisabled()
+			winner = "PLAYER 1"
+			setWinner(winner)
 		}
 	}
 	p1Display.innerText = p1Score
@@ -53,6 +61,8 @@ p2Button.addEventListener('click', function () {
 			isGameOver = true
 			p2Display.classList.add('text-success')
 			btnDisabled()
+			winner = "PLAYER 2"
+			setWinner(winner)
 		}
 	}
 	p2Display.innerText = p2Score
@@ -68,6 +78,7 @@ function resetScore() {
 }
 
 resetButton.addEventListener('click', function () {
+	displayWinner.innerText = ""
 	resetButton.setAttribute('disabled', true)
 	isGameOver = true
 	resetScore()

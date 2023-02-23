@@ -46,3 +46,9 @@ h2 {
 	background-color: #9aabd8;
 	color: #fff;
 }
+
+.winner {
+	font-family: "Orbitron", sans-serif;
+	color: green;
+	font-weight: bolder;
+}
